@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}Inscription — Marauder{% endblock %}
 
 {% block content %}
 
@@ -13,15 +13,15 @@
             <form method="POST">
                 <div class="form-group">
                     <label>Pseudo</label>
-                    <input type="text" name="username" class="input" required />
+                    <input type="text" name="username" class="input" placeholder="votre_pseudo" required />
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" name="email" class="input" required />
+                    <input type="email" name="email" class="input" placeholder="vous@email.com" required />
                 </div>
                 <div class="form-group">
                     <label>Mot de passe</label>
-                    <input type="password" name="password" class="input" required />
+                    <input type="password" name="password" class="input" placeholder="••••••••" required />
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
             </form>
