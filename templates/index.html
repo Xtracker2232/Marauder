@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Marauder — Traquez l'information{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+
+            <h1 class="hero-title">🐺 <span>Marauder</span></h1>
+            <p class="hero-subtitle">
+                Traquez l'information.<br />
+                Accédez à plus de <strong>11 milliards</strong> d'entrées en temps réel.
+            </p>
+
+            <!-- SEARCH BOX -->
+            <div class="search-box">
+                <form action="{{ url_for('search') }}" method="POST">
+                    <div class="search-grid">
+                        <input type="text" name="nom" placeholder="Nom" class="input" />
+                        <input type="text" name="prenom" placeholder="Prénom" class="input" />
+                        <input type="email" name="email" placeholder="Email" class="input" />
+                        <input type="tel" name="telephone" placeholder="Téléphone" class="input" />
+                        <input type="text" name="ville" placeholder="Ville" class="input" />
+                        <button type="submit" class="btn btn-primary btn-block">🔍 Traquer</button>
+                    </div>
+                </form>
+                <p class="note">🔒 Recherche sécurisée · Gratuit pour commencer</p>
+            </div>
+
+            <!-- STATS -->
+            <div class="stats">
+                <div>
+                    <div class="stat-number">11B+</div>
+                    <div class="stat-label">Entrées</div>
+                </div>
+                <div>
+                    <div class="stat-number">79K</div>
+                    <div class="stat-label">Chasseurs</div>
+                </div>
+                <div>
+                    <div class="stat-number">&lt;10ms</div>
+                    <div class="stat-label">Temps de réponse</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+    <div class="container">
+        <h2 class="section-title">Pourquoi <span>Marauder</span> ?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🐺</div>
+                <h3>Chasseur de données</h3>
+                <p>Retrouvez n'importe quelle information en quelques secondes</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Ultra rapide</h3>
+                <p>Résultats en moins de 10 millisecondes</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>100% sécurisé</h3>
+                <p>Vos recherches restent confidentielles</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
