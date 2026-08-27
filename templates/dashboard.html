@@ -1,35 +1,33 @@
 {% extends "base.html" %}
 
-{% block title %}Dashboard — Marauder{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block content %}
 
 <div class="container dashboard-header">
-    <h1 class="dashboard-title">🐺 <span>Dashboard</span></h1>
+    <h1 class="dashboard-title">Dashboard</h1>
 </div>
 
-<!-- QUOTA -->
 <div class="container">
     <div class="quota-box">
         <div class="quota-info">
-            <span>🎯 Recherches aujourd'hui</span>
+            <span>Recherches aujourd'hui</span>
             <span><strong>{{ user.searches_today }}</strong> / {{ max_searches }}</span>
         </div>
         <div class="quota-bar">
             <div class="quota-fill" style="width: {{ (user.searches_today / max_searches * 100) if max_searches > 0 else 0 }}%"></div>
         </div>
         {% if remaining > 0 %}
-            <p style="margin-top: 10px; font-size: 13px; color: #666;">🔥 Encore {{ remaining }} recherche{{ 's' if remaining > 1 else '' }} disponible{{ 's' if remaining > 1 else '' }}</p>
+            <div class="quota-remaining">Encore <span class="highlight">{{ remaining }}</span> recherche{{ 's' if remaining > 1 else '' }} disponible{{ 's' if remaining > 1 else '' }}</div>
         {% else %}
-            <p style="margin-top: 10px; font-size: 13px; color: #cc0000;">⛔ Limite atteinte pour aujourd'hui</p>
+            <div class="quota-remaining"><span class="warning">Limite atteinte pour aujourd'hui</span></div>
         {% endif %}
     </div>
 </div>
 
-<!-- SEARCH FORM -->
 <div class="container">
     <div class="search-section">
-        <h2>🔍 Nouvelle traque</h2>
+        <h2>Nouvelle recherche</h2>
         <form method="POST" action="{{ url_for('search') }}">
             <div class="search-grid">
                 <input type="text" name="nom" placeholder="Nom" class="input" />
@@ -37,25 +35,24 @@
                 <input type="email" name="email" placeholder="Email" class="input" />
                 <input type="tel" name="telephone" placeholder="Téléphone" class="input" />
                 <input type="text" name="ville" placeholder="Ville" class="input" />
-                <button type="submit" class="btn btn-primary btn-block">🐺 Traquer</button>
+                <button type="submit" class="btn btn-primary btn-block">Rechercher</button>
             </div>
         </form>
     </div>
 </div>
 
-<!-- RESULTS -->
 {% if results %}
 <div class="container">
     <div class="results-section">
         <div class="results-header">
-            <h2>🎯 Résultats</h2>
-            <span class="results-count">{{ total }} résultats · {{ took }}ms</span>
+            <h2>Résultats</h2>
+            <span class="results-count">{{ total }} résultats &middot; {{ took }}ms</span>
         </div>
 
         <div class="results-list">
             {% for result in results %}
             <div class="result-card">
-                <h3>🐺 {{ result.prenom or '' }} {{ result.nom_famille or 'Profil inconnu' }}</h3>
+                <h3>{{ result.prenom or '' }} {{ result.nom_famille or 'Profil inconnu' }}</h3>
                 <div class="result-details">
                     {% if result.email %}<p>📧 {{ result.email }}</p>{% endif %}
                     {% if result.telephone %}<p>📱 {{ result.telephone }}</p>{% endif %}
@@ -65,7 +62,7 @@
                 </div>
                 <div class="result-footer">
                     {% if result._sources %}
-                        <span class="sources">📂 {{ result._sources | join(' · ') }}</span>
+                        <span class="sources">{{ result._sources | join(' &middot; ') }}</span>
                     {% endif %}
                     {% if result._confidence %}
                         <div class="confidence">
@@ -84,21 +81,20 @@
 </div>
 {% endif %}
 
-<!-- HISTORY -->
 <div class="container">
     <div class="history-section">
-        <h2>📜 Historique</h2>
+        <h2>Historique</h2>
         {% if history %}
             <ul class="history-list">
                 {% for item in history %}
                 <li>
-                    <span>🐺 {{ item.query }}</span>
-                    <span class="history-meta">{{ item.results_count }} résultats · {{ item.created_at.strftime('%d/%m/%Y %H:%M') }}</span>
+                    <span>{{ item.query }}</span>
+                    <span class="history-meta">{{ item.results_count }} résultats &middot; {{ item.created_at.strftime('%d/%m/%Y %H:%M') }}</span>
                 </li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p class="empty-state">Aucune traque effectuée</p>
+            <p class="empty-state">Aucune recherche effectuée</p>
         {% endif %}
     </div>
 </div>
