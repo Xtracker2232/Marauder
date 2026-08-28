@@ -17,7 +17,7 @@
             {% endif %}
         {% endwith %}
 
-        <form method="POST">
+        <form method="POST" action="{{ url_for('login') }}">
             <div class="form-group">
                 <label>Pseudo</label>
                 <input type="text" name="username" class="input" placeholder="votre_pseudo" required>
