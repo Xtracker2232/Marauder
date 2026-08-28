@@ -25,7 +25,6 @@ login_manager.login_view = 'login'
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -47,15 +46,15 @@ def login():
         return redirect(url_for('dashboard'))
     
     if request.method == 'POST':
-        email = request.form.get('email')
+        username = request.form.get('username')
         password = request.form.get('password')
         
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter_by(username=username).first()
         if user and hashlib.sha256(password.encode()).hexdigest() == user.password:
             login_user(user)
             return redirect(url_for('dashboard'))
         
-        flash('Email ou mot de passe incorrect', 'error')
+        flash('Pseudo ou mot de passe incorrect', 'error')
     
     return render_template('login.html')
 
@@ -66,12 +65,7 @@ def register():
     
     if request.method == 'POST':
         username = request.form.get('username')
-        email = request.form.get('email')
         password = request.form.get('password')
-        
-        if User.query.filter_by(email=email).first():
-            flash('Cet email est déjà utilisé', 'error')
-            return redirect(url_for('register'))
         
         if User.query.filter_by(username=username).first():
             flash('Ce pseudo est déjà pris', 'error')
@@ -79,7 +73,6 @@ def register():
         
         user = User(
             username=username,
-            email=email,
             password=hashlib.sha256(password.encode()).hexdigest()
         )
         db.session.add(user)

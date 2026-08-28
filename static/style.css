@@ -4,14 +4,18 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background: #0a0a0a;
     color: #ffffff;
-    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 100vh;
 }
 
 .auth-container {
@@ -23,7 +27,7 @@ body {
 .auth-card {
     background: #141414;
     border-radius: 16px;
-    padding: 40px 32px;
+    padding: 40px 32px 32px;
     border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -84,6 +88,7 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
+    margin-top: 8px;
 }
 
 .btn:hover {
@@ -123,4 +128,16 @@ body {
     background: rgba(255, 255, 255, 0.05);
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* FOOTER - en bas */
+.auth-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #333;
+}
+
+.auth-footer strong {
+    color: #555;
 }

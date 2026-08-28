@@ -1,53 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Marauder{% endblock %}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐺</text></svg>" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <a href="/" class="logo">Marauder</a>
-                <nav class="nav">
-                    {% if current_user.is_authenticated %}
-                        <a href="/dashboard" class="btn btn-outline">Dashboard</a>
-                        <a href="/logout" class="btn btn-outline">Déconnexion</a>
-                    {% else %}
-                        <a href="/login" class="btn btn-outline">Connexion</a>
-                        <a href="/register" class="btn btn-primary">S'inscrire</a>
-                    {% endif %}
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <div class="container">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-    </div>
-
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>Marauder &middot; 2025 &middot; créé par <strong>@index</strong></p>
-        </div>
-    </footer>
-
+    {% block content %}{% endblock %}
 </body>
 </html>
