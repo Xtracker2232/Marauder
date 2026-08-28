@@ -76,21 +76,18 @@ def register():
         username = request.form.get('username')
         password = request.form.get('password')
         
-        # Vérifier si l'utilisateur existe déjà
         if User.query.filter_by(username=username).first():
             flash('Ce pseudo est déjà pris', 'error')
             return redirect(url_for('register'))
         
-        # Créer l'utilisateur
-        hashed_password = hashlib.sha256(password.encode()).hexdigest()
-        user = User(username=username, password=hashed_password)
-        
+        user = User(
+            username=username,
+            password=hashlib.sha256(password.encode()).hexdigest()
+        )
         db.session.add(user)
         db.session.commit()
         
-        # CONNEXION AUTOMATIQUE
         login_user(user)
-        
         flash('Inscription réussie ! Bienvenue !', 'success')
         return redirect(url_for('dashboard'))
     
@@ -137,7 +134,7 @@ def debug_db():
     if users:
         html += "<ul>"
         for u in users:
-            html += f"<li>ID: {u.id} - Pseudo: {u.username} - Hash: {u.password[:20]}...</li>"
+            html += f"<li>ID: {u.id} - Pseudo: {u.username}</li>"
         html += "</ul>"
     else:
         html += "<p style='color:orange;'>⚠️ Aucun utilisateur trouvé</p>"
@@ -148,7 +145,6 @@ def debug_db():
 # ─── CRÉATION DES TABLES ──────────────────────────────────
 
 def init_db():
-    """Créer les tables si elles n'existent pas"""
     with app.app_context():
         try:
             db.create_all()
@@ -161,14 +157,13 @@ def init_db():
             print(f"📋 Tables existantes: {tables}")
             
         except Exception as e:
-            print(f"❌ Erreur lors de la création des tables: {e}")
+            print(f"❌ Erreur: {e}")
 
 # ─── LANCEMENT ──────────────────────────────────
 
 if __name__ == '__main__':
     init_db()
-    port = int(os.environ.get('PORT', 5000))
+    port = int(os.environ.get('PORT', 8080))
     app.run(host='0.0.0.0', port=port, debug=True)
 else:
-    # Pour Gunicorn (Railway)
     init_db()
