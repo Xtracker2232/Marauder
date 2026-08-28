@@ -13,13 +13,14 @@ app.secret_key = os.getenv('SECRET_KEY', 'dev_key_123')
 
 # ─── BASE DE DONNÉES ──────────────────────────────────
 
-DATABASE_URL = "postgresql://postgres:xpIsEPpiwYBdTXNzNgpiwYNSNJShlenm@postgres.railway.internal:5432/railway"
+DATABASE_URL = os.getenv('DATABASE_URL')
 
-# Utiliser la DATABASE_URL ci-dessus
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+if DATABASE_URL:
+    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///marauder.db'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# ─── INITIALISATION ──────────────────────────────────
 
 db = SQLAlchemy(app)
 login_manager = LoginManager()
@@ -87,11 +88,11 @@ def register():
         db.session.add(user)
         db.session.commit()
         
-        print(f"✅ Utilisateur créé: {username}")
-        print(f"🔑 Hash: {hashed_password}")
+        # CONNEXION AUTOMATIQUE
+        login_user(user)
         
-        flash('Inscription réussie ! Connectez-vous', 'success')
-        return redirect(url_for('login'))
+        flash('Inscription réussie ! Bienvenue !', 'success')
+        return redirect(url_for('dashboard'))
     
     return render_template('register.html')
 
@@ -104,6 +105,7 @@ def dashboard():
 @login_required
 def logout():
     logout_user()
+    flash('Déconnecté', 'success')
     return redirect(url_for('login'))
 
 # ─── DEBUG ──────────────────────────────────
@@ -112,7 +114,6 @@ def logout():
 def debug_db():
     """Vérifier l'état de la base de données"""
     from sqlalchemy import inspect
-    import os
     
     html = "<h1>🔍 Debug Base de données</h1>"
     
