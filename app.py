@@ -5,7 +5,6 @@ import os
 from dotenv import load_dotenv
 from datetime import datetime
 import hashlib
-import re
 
 load_dotenv()
 
@@ -14,18 +13,12 @@ app.secret_key = os.getenv('SECRET_KEY', 'dev_key_123')
 
 # ─── BASE DE DONNÉES ──────────────────────────────────
 
-# Récupérer DATABASE_URL depuis Railway (ou .env)
+# Utiliser DATABASE_URL de Railway
 DATABASE_URL = os.getenv('DATABASE_URL')
 
-# Si on est sur Railway, DATABASE_URL est automatiquement fournie
-# Sinon, on utilise SQLite en local
 if DATABASE_URL:
-    # Railway utilise postgres:// mais SQLAlchemy nécessite postgresql://
-    if DATABASE_URL.startswith('postgres://'):
-        DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 else:
-    # En local, utiliser SQLite
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///marauder.db'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -102,8 +95,33 @@ def register():
 @login_required
 def dashboard():
     return f"""
-    <h1>Bienvenue {current_user.username} !</h1>
-    <a href='/logout'>Déconnexion</a>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Dashboard</title>
+        <style>
+            body {{
+                background: #0a0a0a;
+                color: #fff;
+                font-family: sans-serif;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                flex-direction: column;
+                gap: 20px;
+            }}
+            h1 {{ font-size: 32px; }}
+            a {{ color: #fff; text-decoration: none; padding: 10px 20px; border: 1px solid #333; border-radius: 8px; }}
+            a:hover {{ background: #1a1a1a; }}
+        </style>
+    </head>
+    <body>
+        <h1>Bienvenue {current_user.username} !</h1>
+        <a href="/logout">Déconnexion</a>
+    </body>
+    </html>
     """
 
 @app.route('/logout')
@@ -114,11 +132,11 @@ def logout():
 
 # ─── LANCEMENT ──────────────────────────────────
 
+with app.app_context():
+    db.create_all()
+    print("✅ Base de données connectée")
+    print(f"📁 DATABASE: {app.config['SQLALCHEMY_DATABASE_URI']}")
+
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-        print("✅ Base de données connectée")
-        print(f"📁 DATABASE_URL: {app.config['SQLALCHEMY_DATABASE_URI']}")
-    
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
