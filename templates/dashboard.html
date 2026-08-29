@@ -4,147 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Marauder</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: Arial, sans-serif;
             background: #0a0a0a;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .container {
-            max-width: 400px;
-            width: 100%;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .card {
-            background: rgba(20, 20, 20, 0.9);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 40px 32px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .card h1 {
-            font-size: 24px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 8px;
-        }
-
-        .card .subtitle {
-            color: #666;
-            text-align: center;
-            font-size: 15px;
-            margin-bottom: 24px;
-        }
-
-        .info-box {
-            background: #0a0a0a;
-            padding: 16px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            margin-bottom: 12px;
-        }
-
-        .info-box strong {
-            color: #888;
-        }
-
-        .info-box span {
             color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-
-        .btn-logout {
+        .card {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 16px;
+            width: 360px;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+        }
+        h1 { margin-bottom: 8px; }
+        .subtitle { color: #666; margin-bottom: 24px; }
+        .info { background: #0a0a0a; padding: 12px; border-radius: 8px; margin-bottom: 12px; text-align: left; }
+        .info strong { color: #888; }
+        .info span { color: #fff; }
+        a {
             display: block;
-            width: 100%;
             padding: 12px;
             background: #333;
             color: #fff;
-            border: none;
-            border-radius: 10px;
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
+            border-radius: 8px;
             text-decoration: none;
-            text-align: center;
-            transition: all 0.3s;
             margin-top: 8px;
         }
-
-        .btn-logout:hover {
-            background: #444;
-        }
-
-        .footer-text {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 13px;
-            color: #333;
-        }
-
-        .footer-text strong {
-            color: #555;
-        }
-
-        @media (max-width: 480px) {
-            .card {
-                padding: 32px 20px;
-            }
-        }
+        a:hover { background: #444; }
+        .footer { text-align: center; margin-top: 20px; font-size: 13px; color: #333; }
+        .footer strong { color: #555; }
     </style>
 </head>
 <body>
+    <div class="card">
+        <h1>👋 Bonjour, {{ user.username }}</h1>
+        <p class="subtitle">Bienvenue sur votre espace Marauder</p>
 
-    <div class="container">
-        <div class="card">
-
-            <h1>👋 Bonjour, {{ user.username }}</h1>
-            <p class="subtitle">Bienvenue sur votre espace Marauder</p>
-
-            <div class="info-box">
-                <strong>ID :</strong> <span>#{{ user.id }}</span>
-            </div>
-            <div class="info-box">
-                <strong>Pseudo :</strong> <span>{{ user.username }}</span>
-            </div>
-
-            <a href="{{ url_for('logout') }}" class="btn-logout">Déconnexion</a>
-
+        <div class="info">
+            <strong>ID :</strong> <span>#{{ user.id }}</span>
+        </div>
+        <div class="info">
+            <strong>Pseudo :</strong> <span>{{ user.username }}</span>
         </div>
 
-        <div class="footer-text">
+        <a href="/logout">Déconnexion</a>
+
+        <div class="footer">
             Marauder &middot; 2025 &middot; creat by <strong>@index</strong>
         </div>
     </div>
-
 </body>
 </html>
