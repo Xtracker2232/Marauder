@@ -2,13 +2,16 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 import os
+from dotenv import load_dotenv
 import hashlib
 
-app = Flask(__name__)
-app.secret_key = 'ma_cle_secrete_123456789'
+load_dotenv()
 
-# Base de données SQLite (pour commencer)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///marauder.db'
+app = Flask(__name__)
+app.secret_key = os.getenv('SECRET_KEY', 'ma_cle_secrete_123')
+
+# Base de données
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///marauder.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -33,7 +36,11 @@ def load_user(user_id):
 def index():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
-    return render_template('index.html')
+    return redirect(url_for('login'))
+
+@app.route('/health')
+def health():
+    return "OK", 200
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -89,7 +96,11 @@ def dashboard():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
+
+@app.route('/conditions')
+def conditions():
+    return render_template('conditions.html')
 
 # ─── LANCEMENT ──────────────────────────────────
 
@@ -98,9 +109,5 @@ with app.app_context():
     print("✅ Base de données créée")
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=True)
-
-    @app.route('/conditions')
-def conditions():
-    return render_template('conditions.html')
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port)
