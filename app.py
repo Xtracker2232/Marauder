@@ -7,7 +7,7 @@ import hashlib
 app = Flask(__name__)
 app.secret_key = 'ma_cle_secrete_123'
 
-# ⚠️ UTILISE SQLITE EN ATTENDANT DE RECREER POSTGRESQL
+# Base de données SQLite
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///marauder.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -95,6 +95,7 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
+# ⚠️ ROUTE CGU - À AJOUTER
 @app.route('/conditions')
 def conditions():
     return render_template('conditions.html')
