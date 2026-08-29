@@ -3,24 +3,31 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-<div class="dashboard-container">
-    <h1 class="dashboard-title">👋 Bonjour, {{ user.username }}</h1>
-    <p class="dashboard-subtitle">Bienvenue sur votre espace Marauder</p>
-    
-    <div class="dashboard-grid">
-        <div class="dash-card">
-            <h3>🔍 Recherche</h3>
-            <p>Lancez une recherche avancée</p>
+
+<div class="container">
+    <div class="card">
+
+        <h1>👋 Bonjour, {{ user.username }}</h1>
+        <p style="color: #666; text-align: center; margin-bottom: 20px;">Bienvenue sur votre espace Marauder</p>
+
+        <div style="display: grid; gap: 12px;">
+            <div style="background: #0a0a0a; padding: 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.04);">
+                <strong>ID :</strong> #{{ user.id }}
+            </div>
+            <div style="background: #0a0a0a; padding: 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.04);">
+                <strong>Pseudo :</strong> {{ user.username }}
+            </div>
         </div>
-        <div class="dash-card">
-            <h3>📊 Statistiques</h3>
-            <p>0 recherches effectuées</p>
+
+        <div style="text-align: center; margin-top: 24px;">
+            <a href="{{ url_for('logout') }}" class="btn" style="display: inline-block; padding: 12px 32px; background: #333; color: #fff; border-radius: 10px; text-decoration: none; font-size: 14px;">Déconnexion</a>
         </div>
-        <div class="dash-card">
-            <h3>⚙️ Mon compte</h3>
-            <p><strong>ID :</strong> #{{ user.id }}</p>
-            <a href="/logout" class="btn btn-outline">Déconnexion</a>
-        </div>
+
+    </div>
+
+    <div class="footer-text">
+        Marauder &middot; 2025 &middot; creat by <strong>@index</strong>
     </div>
 </div>
+
 {% endblock %}

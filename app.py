@@ -5,9 +5,9 @@ import os
 import hashlib
 
 app = Flask(__name__)
-app.secret_key = 'ma_cle_secrete_123'
+app.secret_key = 'ma_cle_secrete_123456789'
 
-# Base de données SQLite
+# Base de données
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///marauder.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
