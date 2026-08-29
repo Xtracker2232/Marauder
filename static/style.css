@@ -1,17 +1,175 @@
-/* ─── CRITÈRES ───────────────────────────────── */
-.criteria-section {
-    padding: 80px 0;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     background: #0a0a0a;
+    color: #ffffff;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ─── HEADER ────────────────────────────────── */
+.header {
+    background: rgba(10, 10, 10, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* ─── BOUTONS ────────────────────────────────── */
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: #ffffff;
+    color: #0a0a0a;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-sm {
+    padding: 8px 20px;
+    font-size: 13px;
+}
+
+/* ─── BADGE ──────────────────────────────────── */
+.badge-container {
+    text-align: center;
+    padding: 20px 0 0;
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 13px;
+    color: #888;
+}
+
+/* ─── HERO ───────────────────────────────────── */
+.hero {
+    padding: 60px 0 80px;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 72px;
+    font-weight: 900;
+    letter-spacing: -3px;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 32px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-hero {
+    display: inline-block;
+    padding: 16px 48px;
+    background: #ffffff;
+    color: #0a0a0a;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-hero:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(255, 255, 255, 0.15);
+}
+
+.btn-discord {
+    display: inline-block;
+    padding: 16px 36px;
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-discord:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+/* ─── SECTIONS ───────────────────────────────── */
+.criteria-section,
+.steps-section,
+.features-section {
+    padding: 80px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.04);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .section-title {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 800;
     text-align: center;
     margin-bottom: 8px;
-    letter-spacing: -0.5px;
 }
 
 .section-subtitle {
@@ -21,11 +179,12 @@
     margin-bottom: 40px;
 }
 
+/* ─── CRITÈRES ───────────────────────────────── */
 .criteria-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
     max-width: 800px;
     margin: 0 auto;
 }
@@ -33,9 +192,9 @@
 .criteria-tag {
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 10px 20px;
+    padding: 8px 18px;
     border-radius: 30px;
-    font-size: 14px;
+    font-size: 13px;
     color: #888;
     transition: all 0.3s;
 }
@@ -43,7 +202,6 @@
 .criteria-tag:hover {
     border-color: rgba(255, 255, 255, 0.15);
     color: #fff;
-    transform: translateY(-2px);
 }
 
 .criteria-tag.highlight {
@@ -52,12 +210,7 @@
     background: rgba(255, 255, 255, 0.06);
 }
 
-/* ─── COMMENT ÇA MARCHE ────────────────────── */
-.how-it-works {
-    padding: 80px 0;
-    background: #0a0a0a;
-}
-
+/* ─── ÉTAPES ─────────────────────────────────── */
 .steps-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -84,20 +237,20 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     background: #ffffff;
     color: #0a0a0a;
     border-radius: 50%;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
 }
 
 .step-card h3 {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .step-card p {
@@ -106,13 +259,7 @@
     line-height: 1.6;
 }
 
-/* ─── FONCTIONNALITÉS ──────────────────────── */
-.features-section {
-    padding: 80px 0;
-    background: #0a0a0a;
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
-}
-
+/* ─── FONCTIONNALITÉS ───────────────────────── */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -124,7 +271,7 @@
 .feature-card {
     background: #141414;
     border-radius: 16px;
-    padding: 32px 24px;
+    padding: 28px 24px;
     border: 1px solid rgba(255, 255, 255, 0.04);
     transition: all 0.3s;
 }
@@ -135,14 +282,14 @@
 }
 
 .feature-icon {
-    font-size: 32px;
-    margin-bottom: 12px;
+    font-size: 28px;
+    margin-bottom: 10px;
 }
 
 .feature-card h3 {
-    font-size: 17px;
+    font-size: 16px;
     font-weight: 600;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .feature-card p {
@@ -151,20 +298,28 @@
     line-height: 1.6;
 }
 
-/* ─── ANIMATION SCROLL ─────────────────────── */
-.scroll-animate {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.7s ease;
+/* ─── FOOTER ────────────────────────────────── */
+.footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 24px 0;
+    text-align: center;
 }
 
-.scroll-animate.visible {
-    opacity: 1;
-    transform: translateY(0);
+.footer p {
+    color: #333;
+    font-size: 13px;
+}
+
+.footer strong {
+    color: #555;
 }
 
 /* ─── RESPONSIVE ────────────────────────────── */
 @media (max-width: 768px) {
+    .hero-title {
+        font-size: 44px;
+    }
+
     .steps-grid {
         grid-template-columns: 1fr;
         max-width: 400px;
@@ -175,6 +330,26 @@
         max-width: 400px;
     }
 
+    .header-content {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-hero, .btn-discord {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: 26px;
+    }
+
     .criteria-grid {
         gap: 8px;
     }
@@ -182,17 +357,5 @@
     .criteria-tag {
         font-size: 12px;
         padding: 6px 14px;
-    }
-
-    .section-title {
-        font-size: 28px;
-    }
-
-    .step-card {
-        padding: 24px 20px;
-    }
-
-    .feature-card {
-        padding: 24px 20px;
     }
 }

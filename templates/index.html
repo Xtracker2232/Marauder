@@ -34,9 +34,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">Marauder</h1>
-                <div class="hero-text-container">
-                    <p class="hero-text" id="animated-text"></p>
-                </div>
+                <p class="hero-subtitle">Plus de 11 milliards d'entrées</p>
                 <div class="hero-buttons">
                     <a href="/register" class="btn-hero">Commencer gratuitement</a>
                     <a href="#" class="btn-discord" id="discord-btn">Discord</a>
@@ -45,8 +43,8 @@
         </div>
     </section>
 
-    <!-- CRITÈRES DE RECHERCHE -->
-    <section class="criteria-section scroll-animate">
+    <!-- CRITÈRES -->
+    <section class="criteria-section">
         <div class="container">
             <h2 class="section-title">Que pouvez-vous rechercher ?</h2>
             <p class="section-subtitle">Plus de 20 critères disponibles, combinables à volonté.</p>
@@ -74,8 +72,8 @@
         </div>
     </section>
 
-    <!-- COMMENT ÇA MARCHE -->
-    <section class="how-it-works scroll-animate">
+    <!-- ÉTAPES -->
+    <section class="steps-section">
         <div class="container">
             <h2 class="section-title">Comment ça marche</h2>
             <p class="section-subtitle">De l'inscription à votre première recherche en moins de 2 minutes.</p>
@@ -84,24 +82,24 @@
                 <div class="step-card">
                     <div class="step-number">1</div>
                     <h3>Rejoignez le Discord</h3>
-                    <p>Rejoignez notre serveur Discord pour accéder à la plateforme. Inscription instantanée et sécurisée via OAuth2.</p>
+                    <p>Rejoignez notre serveur Discord pour accéder à la plateforme.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">2</div>
                     <h3>Authentifiez-vous</h3>
-                    <p>Connectez-vous via Discord OAuth2 ou avec votre identifiant. Un code de vérification unique est envoyé en MP.</p>
+                    <p>Connectez-vous via Discord OAuth2 ou avec votre identifiant.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">3</div>
                     <h3>Lancez vos recherches</h3>
-                    <p>Utilisez l'interface web ou la commande /breach sur Discord. Plus de 20 critères, résultats instantanés.</p>
+                    <p>Utilisez l'interface web ou la commande /breach sur Discord.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FONCTIONNALITÉS CLÉS -->
-    <section class="features-section scroll-animate">
+    <!-- FONCTIONNALITÉS -->
+    <section class="features-section">
         <div class="container">
             <h2 class="section-title">Fonctionnalités clés</h2>
             <p class="section-subtitle">Tout ce dont vous avez besoin pour vos recherches OSINT.</p>
@@ -110,32 +108,32 @@
                 <div class="feature-card">
                     <div class="feature-icon">🔍</div>
                     <h3>Recherche multi-critères</h3>
-                    <p>Plus de 20 critères : nom, email, téléphone, adresse, NIR, IBAN, IP, Discord ID et bien plus.</p>
+                    <p>Plus de 20 critères : nom, email, téléphone, adresse, NIR, IBAN, IP, Discord ID.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🔗</div>
                     <h3>Corrélation d'identités</h3>
-                    <p>Croisez automatiquement les données entre plusieurs sources pour établir des liens entre identités.</p>
+                    <p>Croisez automatiquement les données pour établir des liens entre identités.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
                     <h3>Résultats instantanés</h3>
-                    <p>Infrastructure ClickHouse optimisée — temps de réponse sous 100 ms sur des milliards de données.</p>
+                    <p>Temps de réponse sous 100 ms sur des milliards de données.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🔒</div>
                     <h3>Confidentialité totale</h3>
-                    <p>Recherches chiffrées, jamais partagées. Accessible via Tor pour un anonymat complet.</p>
+                    <p>Recherches chiffrées, jamais partagées. Accessible via Tor.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🌳</div>
                     <h3>Arbre familial</h3>
-                    <p>Reconstitution automatique des liens familiaux par foyer à partir des données croisées.</p>
+                    <p>Reconstitution automatique des liens familiaux par foyer.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🤖</div>
                     <h3>Bot Discord intégré</h3>
-                    <p>Recherchez directement depuis Discord avec /breach. Résultats en Components V2 avec export.</p>
+                    <p>Recherchez directement depuis Discord avec /breach.</p>
                 </div>
             </div>
         </div>
@@ -149,72 +147,9 @@
     </footer>
 
     <script>
-        // ─── ANIMATION TEXTE ──────────────────────────
-        const phrases = [
-            "Plus de 11 milliards d'entrées",
-            "Outil CSINT avancé",
-            "Recherche en moins de 30ms",
-            "Données en temps réel",
-            "100% sécurisé"
-        ];
-
-        let index = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const textElement = document.getElementById('animated-text');
-
-        function typeEffect() {
-            const currentPhrase = phrases[index];
-            
-            if (isDeleting) {
-                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            let speed = isDeleting ? 30 : 60;
-
-            if (!isDeleting && charIndex === currentPhrase.length) {
-                speed = 1500;
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                index = (index + 1) % phrases.length;
-                speed = 500;
-            }
-
-            setTimeout(typeEffect, speed);
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            typeEffect();
-        });
-
-        // ─── BOUTON DISCORD ──────────────────────────
         document.getElementById('discord-btn').addEventListener('click', function(e) {
             e.preventDefault();
             window.open('https://discord.gg/ton-lien', '_blank');
-        });
-
-        // ─── ANIMATION AU SCROLL ─────────────────────
-        document.addEventListener('DOMContentLoaded', function() {
-            const animatedElements = document.querySelectorAll('.scroll-animate');
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-
-            animatedElements.forEach(el => {
-                observer.observe(el);
-            });
         });
     </script>
 
