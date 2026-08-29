@@ -49,12 +49,59 @@
             z-index: 1;
         }
 
+        /* ─── CARTE AVEC NÉON ────────────────────── */
         .card {
-            background: rgba(20, 20, 20, 0.9);
+            background: rgba(20, 20, 20, 0.85);
             backdrop-filter: blur(10px);
             border-radius: 16px;
             padding: 40px 32px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* BORDURE NÉON QUI TOURNE */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 18px;
+            background: conic-gradient(
+                from 0deg,
+                transparent,
+                rgba(255, 255, 255, 0.6),
+                transparent,
+                rgba(255, 255, 255, 0.6),
+                transparent,
+                rgba(255, 255, 255, 0.6),
+                transparent
+            );
+            z-index: -1;
+            animation: rotateNeon 4s linear infinite;
+            background-size: 300% 300%;
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            background: #141414;
+            border-radius: 14px;
+            z-index: -1;
+        }
+
+        @keyframes rotateNeon {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .card h1 {
@@ -62,6 +109,8 @@
             font-weight: 700;
             text-align: center;
             margin-bottom: 4px;
+            position: relative;
+            z-index: 2;
         }
 
         .card h2 {
@@ -70,10 +119,14 @@
             color: #666;
             text-align: center;
             margin-bottom: 28px;
+            position: relative;
+            z-index: 2;
         }
 
         .form-group {
             margin-bottom: 16px;
+            position: relative;
+            z-index: 2;
         }
 
         .form-group label {
@@ -98,6 +151,7 @@
 
         .input:focus {
             border-color: #fff;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
         }
 
         .input::placeholder {
@@ -116,10 +170,13 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
+            position: relative;
+            z-index: 2;
         }
 
         .btn:hover {
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
         }
 
         .auth-link {
@@ -127,6 +184,8 @@
             margin-top: 20px;
             font-size: 14px;
             color: #555;
+            position: relative;
+            z-index: 2;
         }
 
         .auth-link a {
@@ -154,6 +213,8 @@
             border-radius: 10px;
             margin-bottom: 16px;
             font-size: 14px;
+            position: relative;
+            z-index: 2;
         }
 
         .alert-success {
@@ -166,6 +227,12 @@
             background: rgba(255, 0, 0, 0.05);
             color: #ff4444;
             border: 1px solid rgba(255, 0, 0, 0.1);
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 32px 20px;
+            }
         }
     </style>
 </head>
