@@ -17,11 +17,11 @@
                 <a href="/" class="logo">Marauder</a>
                 <nav>
                     {% if current_user.is_authenticated %}
-                        <a href="/dashboard" class="btn btn-outline">Dashboard</a>
-                        <a href="/logout" class="btn btn-outline">Déconnexion</a>
+                        <a href="/dashboard" class="btn btn-outline btn-sm">Dashboard</a>
+                        <a href="/logout" class="btn btn-outline btn-sm">Déconnexion</a>
                     {% else %}
-                        <a href="/login" class="btn btn-outline">Connexion</a>
-                        <a href="/register" class="btn btn-primary">S'inscrire</a>
+                        <a href="/login" class="btn btn-outline btn-sm">Connexion</a>
+                        <a href="/register" class="btn btn-primary btn-sm">S'inscrire</a>
                     {% endif %}
                 </nav>
             </div>
