@@ -22,19 +22,40 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+        }
+
+        /* ─── QUADRILLAGE EN FOND ────────────────── */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
             max-width: 400px;
             width: 100%;
             padding: 20px;
+            position: relative;
+            z-index: 1;
         }
 
         .card {
-            background: #141414;
+            background: rgba(20, 20, 20, 0.9);
+            backdrop-filter: blur(10px);
             border-radius: 16px;
             padding: 40px 32px;
             border: 1px solid rgba(255, 255, 255, 0.06);
+            position: relative;
         }
 
         .card h1 {
