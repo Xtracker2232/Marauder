@@ -1,33 +1,172 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Marauder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-{% block title %}Dashboard{% endblock %}
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
 
-{% block content %}
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
 
-<div class="container">
-    <div class="card">
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
 
-        <h1>👋 Bonjour, {{ user.username }}</h1>
-        <p style="color: #666; text-align: center; margin-bottom: 20px;">Bienvenue sur votre espace Marauder</p>
+        .card {
+            background: rgba(20, 20, 20, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 40px 32px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
 
-        <div style="display: grid; gap: 12px;">
-            <div style="background: #0a0a0a; padding: 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.04);">
-                <strong>ID :</strong> #{{ user.id }}
+        .card h1 {
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .card .subtitle {
+            color: #666;
+            text-align: center;
+            font-size: 15px;
+            margin-bottom: 24px;
+        }
+
+        .info-box {
+            background: #0a0a0a;
+            padding: 16px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            margin-bottom: 12px;
+        }
+
+        .info-box strong {
+            color: #888;
+        }
+
+        .info-box span {
+            color: #fff;
+        }
+
+        .btn-logout {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+            margin-top: 8px;
+        }
+
+        .btn-logout:hover {
+            background: #444;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .footer-text a {
+            color: #555;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-text a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .footer-text strong {
+            color: #555;
+        }
+
+        .footer-text .sep {
+            color: #333;
+            margin: 0 6px;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 32px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+
+            <h1>👋 Bonjour, {{ user.username }}</h1>
+            <p class="subtitle">Bienvenue sur votre espace Marauder</p>
+
+            <div class="info-box">
+                <strong>ID :</strong> <span>#{{ user.id }}</span>
             </div>
-            <div style="background: #0a0a0a; padding: 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.04);">
-                <strong>Pseudo :</strong> {{ user.username }}
+            <div class="info-box">
+                <strong>Pseudo :</strong> <span>{{ user.username }}</span>
             </div>
+
+            <a href="{{ url_for('logout') }}" class="btn-logout">Déconnexion</a>
+
         </div>
 
-        <div style="text-align: center; margin-top: 24px;">
-            <a href="{{ url_for('logout') }}" class="btn" style="display: inline-block; padding: 12px 32px; background: #333; color: #fff; border-radius: 10px; text-decoration: none; font-size: 14px;">Déconnexion</a>
+        <div class="footer-text">
+            Marauder &middot; 2025 &middot; creat by <strong>@index</strong>
+            <span class="sep">|</span>
+            <a href="{{ url_for('conditions') }}" target="_blank">Conditions</a>
         </div>
-
     </div>
 
-    <div class="footer-text">
-        Marauder &middot; 2025 &middot; creat by <strong>@index</strong>
-    </div>
-</div>
-
-{% endblock %}
+</body>
+</html>
