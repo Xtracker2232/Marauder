@@ -56,33 +56,34 @@
             border-radius: 16px;
             padding: 40px 32px;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 2px solid transparent;
         }
 
         /* ─── NÉON QUI TOURNE ──────────────────────── */
         .card::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
+            inset: -2px;
             border-radius: 18px;
+            padding: 2px;
             background: conic-gradient(
                 from 0deg,
                 transparent,
-                rgba(255, 255, 255, 0.8),
+                #ffffff,
                 transparent,
-                rgba(255, 255, 255, 0.8),
+                #ffffff,
                 transparent,
-                rgba(255, 255, 255, 0.8),
+                #ffffff,
+                transparent,
+                #ffffff,
                 transparent
             );
-            z-index: -1;
-            animation: rotateNeon 3s linear infinite;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
             mask-composite: exclude;
-            padding: 2px;
+            animation: rotateNeon 3s linear infinite;
+            pointer-events: none;
         }
 
         @keyframes rotateNeon {
