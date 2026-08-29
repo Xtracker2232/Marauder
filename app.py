@@ -2,16 +2,13 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 import os
-from dotenv import load_dotenv
 import hashlib
 
-load_dotenv()
-
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY', 'ma_cle_secrete_123')
+app.secret_key = 'ma_cle_secrete_123'
 
-# Base de données
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///marauder.db')
+# ⚠️ UTILISE SQLITE EN ATTENDANT DE RECREER POSTGRESQL
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///marauder.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -106,7 +103,7 @@ def conditions():
 
 with app.app_context():
     db.create_all()
-    print("✅ Base de données créée")
+    print("✅ Base de données SQLite créée")
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
