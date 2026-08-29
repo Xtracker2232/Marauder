@@ -27,7 +27,7 @@
             </div>
 
             <div class="hero-buttons">
-                <a href="/login" class="btn-hero">Commencez gratuitement</a>
+                <a href="{{ url_for('login') }}" class="btn-hero">Commencer gratuitement</a>
                 <a href="#" class="btn-discord" id="discord-btn">Discord</a>
             </div>
 
@@ -74,13 +74,15 @@
             setTimeout(typeEffect, speed);
         }
 
-        // Lancer l'animation
-        typeEffect();
+        // Lancer l'animation au chargement
+        document.addEventListener('DOMContentLoaded', function() {
+            typeEffect();
+        });
 
         // ─── BOUTON DISCORD ──────────────────────────
         document.getElementById('discord-btn').addEventListener('click', function(e) {
             e.preventDefault();
-            // À remplacer par le vrai lien Discord plus tard
+            // À remplacer par le vrai lien Discord
             window.open('https://discord.gg/ton-lien', '_blank');
         });
     </script>
