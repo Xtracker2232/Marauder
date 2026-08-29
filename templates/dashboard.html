@@ -8,11 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -57,7 +53,7 @@
         }
 
         .card h1 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             text-align: center;
             margin-bottom: 8px;
@@ -115,24 +111,8 @@
             color: #333;
         }
 
-        .footer-text a {
-            color: #555;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-text a:hover {
-            color: #fff;
-            text-decoration: underline;
-        }
-
         .footer-text strong {
             color: #555;
-        }
-
-        .footer-text .sep {
-            color: #333;
-            margin: 0 6px;
         }
 
         @media (max-width: 480px) {
@@ -163,8 +143,6 @@
 
         <div class="footer-text">
             Marauder &middot; 2025 &middot; creat by <strong>@index</strong>
-            <span class="sep">|</span>
-            <a href="{{ url_for('conditions') }}" target="_blank">Conditions</a>
         </div>
     </div>
 
