@@ -25,7 +25,6 @@
             position: relative;
         }
 
-        /* ─── QUADRILLAGE ──────────────────────────── */
         body::before {
             content: '';
             position: fixed;
@@ -62,14 +61,6 @@
             font-weight: 700;
             text-align: center;
             margin-bottom: 4px;
-        }
-
-        .card h2 {
-            font-size: 15px;
-            font-weight: 400;
-            color: #666;
-            text-align: center;
-            margin-bottom: 28px;
         }
 
         .form-group {
@@ -126,7 +117,7 @@
 
         .auth-link {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 16px;
             font-size: 14px;
             color: #555;
         }
@@ -137,6 +128,23 @@
         }
 
         .auth-link a:hover {
+            text-decoration: underline;
+        }
+
+        .cgu-text {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 12px;
+            color: #444;
+        }
+
+        .cgu-text a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .cgu-text a:hover {
+            color: #fff;
             text-decoration: underline;
         }
 
@@ -206,6 +214,11 @@
 
             <p class="auth-link">
                 Pas encore de compte ? <a href="{{ url_for('register') }}">S'inscrire</a>
+            </p>
+
+            <p class="cgu-text">
+                En vous connectant, vous acceptez nos<br>
+                <a href="{{ url_for('conditions') }}" target="_blank">Conditions Générales d'Utilisation</a>
             </p>
 
         </div>

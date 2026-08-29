@@ -95,7 +95,6 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-# ⚠️ ROUTE CGU - À AJOUTER
 @app.route('/conditions')
 def conditions():
     return render_template('conditions.html')
@@ -104,7 +103,7 @@ def conditions():
 
 with app.app_context():
     db.create_all()
-    print("✅ Base de données SQLite créée")
+    print("✅ Base de données créée")
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
