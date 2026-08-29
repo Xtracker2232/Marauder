@@ -1,285 +1,198 @@
 /* ============================================
-   DASHBOARD - QUADRILLAGE BLANC
+   MARAUDER - PAGE D'ACCUEIL
    ============================================ */
 
-.dashboard-container {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 20px 24px 60px;
-    position: relative;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Effet de quadrillage blanc */
-.dashboard-container::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.dashboard-container > * {
-    position: relative;
-    z-index: 1;
-}
-
-/* ─── NAVBAR ────────────────────────────────── */
-.dash-nav {
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #0a0a0a;
+    color: #ffffff;
+    min-height: 100vh;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 16px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    margin-bottom: 32px;
+    justify-content: center;
+    overflow: hidden;
 }
 
-.dash-nav-brand {
-    font-size: 22px;
-    font-weight: 700;
-    color: #fff;
-    text-decoration: none;
+/* ─── BADGE ──────────────────────────────────── */
+.badge-container {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
 }
 
-.dash-nav-center {
+.badge {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #888;
+    letter-spacing: 0.3px;
+    backdrop-filter: blur(10px);
+}
+
+/* ─── HERO ───────────────────────────────────── */
+.hero {
     display: flex;
-    gap: 24px;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
 }
 
-.dash-nav-right {
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    padding: 20px;
+}
+
+/* ─── TITRE ──────────────────────────────────── */
+.hero-title {
+    font-size: 80px;
+    font-weight: 900;
+    letter-spacing: -3px;
+    color: #ffffff;
+    margin-bottom: 16px;
+    line-height: 1.1;
+    text-shadow: 0 0 60px rgba(255, 255, 255, 0.03);
+}
+
+/* ─── TEXTE ANIMÉ ───────────────────────────── */
+.hero-text-container {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-text {
+    font-size: 22px;
+    font-weight: 400;
+    color: #666;
+    letter-spacing: 0.5px;
+    min-height: 40px;
+    border-right: 2px solid rgba(255, 255, 255, 0.15);
+    padding-right: 8px;
+    display: inline-block;
+}
+
+/* ─── BOUTONS ────────────────────────────────── */
+.hero-buttons {
     display: flex;
     gap: 16px;
-    align-items: center;
-}
-
-.dash-nav-link {
-    color: #666;
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s;
-    padding: 6px 4px;
-}
-
-.dash-nav-link:hover {
-    color: #fff;
-}
-
-.dash-nav-link.active {
-    color: #fff;
-    border-bottom: 2px solid #fff;
-}
-
-/* ─── HEADER ────────────────────────────────── */
-.dash-header {
-    margin-bottom: 32px;
-}
-
-.dash-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 12px;
-}
-
-.dash-tabs {
-    display: flex;
-    gap: 8px;
+    justify-content: center;
+    margin-top: 32px;
     flex-wrap: wrap;
 }
 
-.dash-tab {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
-    padding: 8px 16px;
-    color: #666;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-family: inherit;
-}
-
-.dash-tab:hover {
-    border-color: rgba(255, 255, 255, 0.15);
-    color: #fff;
-}
-
-.dash-tab.active {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.15);
-    color: #fff;
-}
-
-/* ─── PANEL DE RECHERCHE ────────────────────── */
-.search-panel {
-    background: rgba(20, 20, 20, 0.8);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 24px;
-}
-
-/* Sections */
-.search-section {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    padding: 4px 0;
-}
-
-.search-section:last-child {
-    border-bottom: none;
-}
-
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    cursor: pointer;
-    user-select: none;
-    transition: color 0.3s;
-}
-
-.section-header:hover {
-    color: #fff;
-}
-
-.section-title {
-    font-size: 15px;
+.btn-hero {
+    display: inline-block;
+    padding: 16px 48px;
+    background: #ffffff;
+    color: #0a0a0a;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
     font-weight: 600;
-    color: #888;
-    letter-spacing: 0.3px;
-}
-
-.section-toggle {
-    color: #444;
-    font-size: 12px;
-}
-
-.section-body {
-    padding: 8px 0 20px 0;
-    display: none;
-}
-
-.section-body.active {
-    display: block;
-}
-
-/* Grille de recherche */
-.search-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-}
-
-.search-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.search-group label {
-    font-size: 12px;
-    color: #555;
-    margin-bottom: 4px;
-    letter-spacing: 0.3px;
-}
-
-.search-group .input {
-    padding: 10px 14px;
-    background: #0a0a0a;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    font-size: 13px;
-    color: #fff;
-    outline: none;
-    transition: border-color 0.3s;
-    width: 100%;
-}
-
-.search-group .input:focus {
-    border-color: #fff;
-}
-
-.search-group .input::placeholder {
-    color: #333;
-}
-
-.search-group select.input {
-    appearance: none;
+    text-decoration: none;
     cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
 }
 
-/* Boutons actions */
-.search-actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 24px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.04);
+.btn-hero:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(255, 255, 255, 0.15);
+    background: #ffffff;
 }
 
-.search-actions .btn {
-    min-width: 140px;
+.btn-hero:active {
+    transform: translateY(0px);
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-    .search-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.btn-discord {
+    display: inline-block;
+    padding: 16px 36px;
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
+.btn-discord:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+/* ─── RESPONSIVE ────────────────────────────── */
 @media (max-width: 768px) {
-    .search-grid {
-        grid-template-columns: 1fr 1fr;
+    .hero-title {
+        font-size: 48px;
+        letter-spacing: -1px;
     }
 
-    .dash-nav {
-        flex-direction: column;
-        gap: 12px;
+    .hero-text {
+        font-size: 17px;
     }
 
-    .dash-nav-center {
-        gap: 16px;
-        flex-wrap: wrap;
-        justify-content: center;
+    .btn-hero {
+        padding: 14px 32px;
+        font-size: 14px;
     }
 
-    .dash-nav-right {
-        flex-wrap: wrap;
-        justify-content: center;
+    .btn-discord {
+        padding: 14px 28px;
+        font-size: 14px;
     }
 
-    .dash-tabs {
-        overflow-x: auto;
-        flex-wrap: nowrap;
-        padding-bottom: 4px;
-    }
-
-    .search-actions {
-        flex-direction: column;
-    }
-
-    .search-actions .btn {
-        width: 100%;
+    .badge {
+        font-size: 11px;
+        padding: 6px 14px;
     }
 }
 
 @media (max-width: 480px) {
-    .search-grid {
-        grid-template-columns: 1fr;
+    .hero-title {
+        font-size: 36px;
     }
 
-    .dashboard-container {
-        padding: 12px;
+    .hero-text {
+        font-size: 15px;
+        min-height: 30px;
     }
 
-    .search-panel {
-        padding: 16px;
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .btn-hero {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+        padding: 14px 20px;
+    }
+
+    .btn-discord {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+        padding: 14px 20px;
     }
 }

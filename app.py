@@ -2,24 +2,13 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_sqlalchemy import SQLAlchemy
 import os
-from dotenv import load_dotenv
-from datetime import datetime
 import hashlib
 
-load_dotenv()
-
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY', 'dev_key_123')
+app.secret_key = 'ma_cle_secrete_123456789'
 
-# ─── BASE DE DONNÉES ──────────────────────────────────
-
-DATABASE_URL = os.getenv('DATABASE_URL')
-
-if DATABASE_URL:
-    app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
-else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///marauder.db'
-
+# Base de données SQLite (pour commencer)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///marauder.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -27,14 +16,12 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-# ─── MODÈLES ──────────────────────────────────
+# ─── MODÈLE ──────────────────────────────────
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -46,7 +33,7 @@ def load_user(user_id):
 def index():
     if current_user.is_authenticated:
         return redirect(url_for('dashboard'))
-    return redirect(url_for('login'))
+    return render_template('index.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -102,68 +89,14 @@ def dashboard():
 @login_required
 def logout():
     logout_user()
-    flash('Déconnecté', 'success')
-    return redirect(url_for('login'))
-
-# ─── DEBUG ──────────────────────────────────
-
-@app.route('/debug/db')
-def debug_db():
-    """Vérifier l'état de la base de données"""
-    from sqlalchemy import inspect
-    
-    html = "<h1>🔍 Debug Base de données</h1>"
-    
-    # 1. Vérifier la connexion
-    try:
-        db.engine.connect()
-        html += "<p>✅ Connexion à la base OK</p>"
-    except Exception as e:
-        html += f"<p>❌ Erreur de connexion: {e}</p>"
-        return html
-    
-    # 2. Voir les tables existantes
-    inspector = inspect(db.engine)
-    tables = inspector.get_table_names()
-    html += f"<p>📋 Tables existantes: {tables}</p>"
-    
-    # 3. Voir les utilisateurs
-    users = User.query.all()
-    html += f"<p>👤 Nombre d'utilisateurs: {len(users)}</p>"
-    
-    if users:
-        html += "<ul>"
-        for u in users:
-            html += f"<li>ID: {u.id} - Pseudo: {u.username}</li>"
-        html += "</ul>"
-    else:
-        html += "<p style='color:orange;'>⚠️ Aucun utilisateur trouvé</p>"
-    
-    html += '<br><a href="/">← Retour</a>'
-    return html
-
-# ─── CRÉATION DES TABLES ──────────────────────────────────
-
-def init_db():
-    with app.app_context():
-        try:
-            db.create_all()
-            print("✅ Tables créées avec succès")
-            print(f"📁 DATABASE: {app.config['SQLALCHEMY_DATABASE_URI']}")
-            
-            from sqlalchemy import inspect
-            inspector = inspect(db.engine)
-            tables = inspector.get_table_names()
-            print(f"📋 Tables existantes: {tables}")
-            
-        except Exception as e:
-            print(f"❌ Erreur: {e}")
+    return redirect(url_for('index'))
 
 # ─── LANCEMENT ──────────────────────────────────
 
+with app.app_context():
+    db.create_all()
+    print("✅ Base de données créée")
+
 if __name__ == '__main__':
-    init_db()
-    port = int(os.environ.get('PORT', 8080))
+    port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
-else:
-    init_db()

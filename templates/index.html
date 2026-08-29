@@ -1,75 +1,89 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marauder - Moteur de recherche avancé</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
 
-{% block title %}Marauder — Moteur de recherche avancé{% endblock %}
+    <!-- BADGE EN HAUT -->
+    <div class="badge-container">
+        <span class="badge">🇫🇷 Base française · 11 milliards d'entrées</span>
+    </div>
 
-{% block content %}
-
-<section class="hero">
-    <div class="container">
+    <!-- HERO -->
+    <section class="hero">
         <div class="hero-content">
 
-            <h1 class="hero-title">
-                Marauder
-            </h1>
-            <p class="hero-subtitle">
-                Moteur de recherche avancé.<br />
-                <strong>11 milliards</strong> d'entrées en temps réel.
-            </p>
+            <h1 class="hero-title">Marauder</h1>
 
-            <div class="search-box">
-                <form action="{{ url_for('search') }}" method="POST">
-                    <div class="search-grid">
-                        <input type="text" name="nom" placeholder="Nom" class="input" />
-                        <input type="text" name="prenom" placeholder="Prénom" class="input" />
-                        <input type="email" name="email" placeholder="Email" class="input" />
-                        <input type="tel" name="telephone" placeholder="Téléphone" class="input" />
-                        <input type="text" name="ville" placeholder="Ville" class="input" />
-                        <button type="submit" class="btn btn-primary btn-block">Rechercher</button>
-                    </div>
-                </form>
-                <p class="note">Recherche sécurisée &middot; Gratuit pour commencer</p>
+            <div class="hero-text-container">
+                <p class="hero-text" id="animated-text"></p>
             </div>
 
-            <div class="stats">
-                <div>
-                    <div class="stat-number">11B+</div>
-                    <div class="stat-label">Entrées</div>
-                </div>
-                <div>
-                    <div class="stat-number">79K</div>
-                    <div class="stat-label">Utilisateurs</div>
-                </div>
-                <div>
-                    <div class="stat-number">< 10ms</div>
-                    <div class="stat-label">Temps de réponse</div>
-                </div>
+            <div class="hero-buttons">
+                <a href="/login" class="btn-hero">Commencer gratuitement</a>
+                <a href="#" class="btn-discord" id="discord-btn">Discord</a>
             </div>
 
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="features">
-    <div class="container">
-        <h2 class="section-title">Pourquoi <span class="accent">Marauder</span></h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <h3>Recherche avancée</h3>
-                <p>Retrouvez n'importe quelle information en quelques secondes</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Ultra rapide</h3>
-                <p>Résultats en moins de 10 millisecondes</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h3>Entièrement sécurisé</h3>
-                <p>Vos recherches restent confidentielles</p>
-            </div>
-        </div>
-    </div>
-</section>
+    <script>
+        // ─── ANIMATION TEXTE ──────────────────────────
+        const phrases = [
+            "Plus de 11 milliards d'entrées",
+            "Outil CSINT avancé",
+            "Recherche en moins de 30ms",
+            "Données en temps réel",
+            "100% sécurisé"
+        ];
 
-{% endblock %}
+        let index = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const textElement = document.getElementById('animated-text');
+
+        function typeEffect() {
+            const currentPhrase = phrases[index];
+            
+            if (isDeleting) {
+                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let speed = isDeleting ? 30 : 60;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                speed = 1500;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                index = (index + 1) % phrases.length;
+                speed = 500;
+            }
+
+            setTimeout(typeEffect, speed);
+        }
+
+        // Lancer l'animation
+        typeEffect();
+
+        // ─── BOUTON DISCORD ──────────────────────────
+        document.getElementById('discord-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            // À remplacer par le vrai lien Discord plus tard
+            window.open('https://discord.gg/ton-lien', '_blank');
+        });
+    </script>
+
+</body>
+</html>

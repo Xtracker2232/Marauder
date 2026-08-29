@@ -3,21 +3,11 @@
 {% block title %}Connexion{% endblock %}
 
 {% block content %}
-
 <div class="auth-container">
     <div class="auth-card">
         <h1>Marauder</h1>
         <h2>Connexion</h2>
-
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">{{ message }}</div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
-
-        <form method="POST" action="{{ url_for('login') }}">
+        <form method="POST">
             <div class="form-group">
                 <label>Pseudo</label>
                 <input type="text" name="username" class="input" placeholder="votre_pseudo" required>
@@ -26,17 +16,9 @@
                 <label>Mot de passe</label>
                 <input type="password" name="password" class="input" placeholder="••••••••" required>
             </div>
-            <button type="submit" class="btn">Se connecter</button>
+            <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
         </form>
-
-        <p class="auth-link">
-            Pas encore de compte ? <a href="{{ url_for('register') }}">S'inscrire</a>
-        </p>
-    </div>
-
-    <div class="auth-footer">
-        Marauder &middot; 2025 &middot; creat by <strong>@index</strong>
+        <p class="auth-link">Pas encore de compte ? <a href="{{ url_for('register') }}">S'inscrire</a></p>
     </div>
 </div>
-
 {% endblock %}
