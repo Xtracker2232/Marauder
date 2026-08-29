@@ -11,28 +11,142 @@
 </head>
 <body>
 
-    <!-- BADGE EN HAUT -->
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="/" class="logo">Marauder</a>
+                <nav>
+                    <a href="/login" class="btn btn-outline btn-sm">Connexion</a>
+                    <a href="/register" class="btn btn-primary btn-sm">S'inscrire</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- BADGE -->
     <div class="badge-container">
         <span class="badge">🇫🇷 Base française · 11 milliards d'entrées</span>
     </div>
 
     <!-- HERO -->
     <section class="hero">
-        <div class="hero-content">
-
-            <h1 class="hero-title">Marauder</h1>
-
-            <div class="hero-text-container">
-                <p class="hero-text" id="animated-text"></p>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Marauder</h1>
+                <div class="hero-text-container">
+                    <p class="hero-text" id="animated-text"></p>
+                </div>
+                <div class="hero-buttons">
+                    <a href="/register" class="btn-hero">Commencer gratuitement</a>
+                    <a href="#" class="btn-discord" id="discord-btn">Discord</a>
+                </div>
             </div>
-
-            <div class="hero-buttons">
-                <a href="{{ url_for('login') }}" class="btn-hero">Commencer gratuitement</a>
-                <a href="#" class="btn-discord" id="discord-btn">Discord</a>
-            </div>
-
         </div>
     </section>
+
+    <!-- CRITÈRES DE RECHERCHE -->
+    <section class="criteria-section scroll-animate">
+        <div class="container">
+            <h2 class="section-title">Que pouvez-vous rechercher ?</h2>
+            <p class="section-subtitle">Plus de 20 critères disponibles, combinables à volonté.</p>
+
+            <div class="criteria-grid">
+                <span class="criteria-tag">Nom</span>
+                <span class="criteria-tag">Prénom</span>
+                <span class="criteria-tag">Email</span>
+                <span class="criteria-tag">Téléphone</span>
+                <span class="criteria-tag">Adresse</span>
+                <span class="criteria-tag">Code postal</span>
+                <span class="criteria-tag">Ville</span>
+                <span class="criteria-tag">Département</span>
+                <span class="criteria-tag">NIR</span>
+                <span class="criteria-tag">IBAN</span>
+                <span class="criteria-tag">IP</span>
+                <span class="criteria-tag">Discord ID</span>
+                <span class="criteria-tag">Date de naissance</span>
+                <span class="criteria-tag">Employeur</span>
+                <span class="criteria-tag">Profession</span>
+                <span class="criteria-tag">Nationalité</span>
+                <span class="criteria-tag">Plaque d'immatriculation</span>
+                <span class="criteria-tag highlight">+ bien plus...</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMMENT ÇA MARCHE -->
+    <section class="how-it-works scroll-animate">
+        <div class="container">
+            <h2 class="section-title">Comment ça marche</h2>
+            <p class="section-subtitle">De l'inscription à votre première recherche en moins de 2 minutes.</p>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Rejoignez le Discord</h3>
+                    <p>Rejoignez notre serveur Discord pour accéder à la plateforme. Inscription instantanée et sécurisée via OAuth2.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Authentifiez-vous</h3>
+                    <p>Connectez-vous via Discord OAuth2 ou avec votre identifiant. Un code de vérification unique est envoyé en MP.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Lancez vos recherches</h3>
+                    <p>Utilisez l'interface web ou la commande /breach sur Discord. Plus de 20 critères, résultats instantanés.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FONCTIONNALITÉS CLÉS -->
+    <section class="features-section scroll-animate">
+        <div class="container">
+            <h2 class="section-title">Fonctionnalités clés</h2>
+            <p class="section-subtitle">Tout ce dont vous avez besoin pour vos recherches OSINT.</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Recherche multi-critères</h3>
+                    <p>Plus de 20 critères : nom, email, téléphone, adresse, NIR, IBAN, IP, Discord ID et bien plus.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3>Corrélation d'identités</h3>
+                    <p>Croisez automatiquement les données entre plusieurs sources pour établir des liens entre identités.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Résultats instantanés</h3>
+                    <p>Infrastructure ClickHouse optimisée — temps de réponse sous 100 ms sur des milliards de données.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Confidentialité totale</h3>
+                    <p>Recherches chiffrées, jamais partagées. Accessible via Tor pour un anonymat complet.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌳</div>
+                    <h3>Arbre familial</h3>
+                    <p>Reconstitution automatique des liens familiaux par foyer à partir des données croisées.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Bot Discord intégré</h3>
+                    <p>Recherchez directement depuis Discord avec /breach. Résultats en Components V2 avec export.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>Marauder &middot; 2025 &middot; creat by <strong>@index</strong></p>
+        </div>
+    </footer>
 
     <script>
         // ─── ANIMATION TEXTE ──────────────────────────
@@ -74,7 +188,6 @@
             setTimeout(typeEffect, speed);
         }
 
-        // Lancer l'animation au chargement
         document.addEventListener('DOMContentLoaded', function() {
             typeEffect();
         });
@@ -82,8 +195,26 @@
         // ─── BOUTON DISCORD ──────────────────────────
         document.getElementById('discord-btn').addEventListener('click', function(e) {
             e.preventDefault();
-            // À remplacer par le vrai lien Discord
             window.open('https://discord.gg/ton-lien', '_blank');
+        });
+
+        // ─── ANIMATION AU SCROLL ─────────────────────
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.scroll-animate');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
         });
     </script>
 
