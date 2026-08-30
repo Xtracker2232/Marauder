@@ -7,7 +7,6 @@ import hashlib
 app = Flask(__name__)
 app.secret_key = 'ma_cle_secrete_123456789'
 
-# Base de données SQLite
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///marauder.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -15,8 +14,6 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
-
-# ─── MODÈLE ──────────────────────────────────
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,8 +23,6 @@ class User(UserMixin, db.Model):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-
-# ─── ROUTES ──────────────────────────────────
 
 @app.route('/')
 def index():
@@ -95,11 +90,8 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-# ─── LANCEMENT ──────────────────────────────────
-
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-        print("✅ Base de données créée")
     port = int(os.environ.get('PORT', 8080))
     app.run(host='0.0.0.0', port=port)
